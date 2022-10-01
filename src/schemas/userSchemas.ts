@@ -5,5 +5,5 @@ export const newUserSchema = Joi.object<TUserData>({
   name: Joi.string().trim().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required(),
-  superuser: Joi.boolean().required(),
+  superuser: Joi.boolean(),
 });
