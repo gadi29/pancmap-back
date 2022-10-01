@@ -1,10 +1,12 @@
 import { TUserData } from "../types/userTypes";
 import bcrypt from "bcrypt";
 import { Users } from "@prisma/client";
+import * as userRepository from "../repositories/userRepository";
 
 async function getUserByEmail(email: string) {
-  //const user: Users = await ;
-  //return user;
+  const user: Users = await userRepository.findByEmail(email);
+
+  return user;
 }
 
 export async function signUp(newUser: TUserData) {
