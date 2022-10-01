@@ -35,7 +35,7 @@ model Registers {
 
 model Species {
   id                     Int           @id @default(autoincrement())
-  cientificName          String
+  cientificName          String        @unique
   generalCharacteristics String
   curiosities            String?
   leafMorfology          String
