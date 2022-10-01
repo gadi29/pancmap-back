@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { TUserData } from "../types/userTypes";
+import { TLoginUser, TUserData } from "../types/userTypes";
 
 export const newUserSchema = Joi.object<TUserData>({
   name: Joi.string().trim().required(),
@@ -8,7 +8,7 @@ export const newUserSchema = Joi.object<TUserData>({
   superuser: Joi.boolean(),
 });
 
-export const loginSchema = Joi.object({
+export const loginSchema = Joi.object<TLoginUser>({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
 });
