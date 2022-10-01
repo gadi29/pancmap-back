@@ -19,7 +19,7 @@ export async function signUp(newUser: TUserData) {
     password: passwordHash(newUser.password),
   };
 
-  //repository
+  await userRepository.createNewUser(userData);
 
   return;
 }
