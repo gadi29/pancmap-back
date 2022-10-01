@@ -1,4 +1,4 @@
-import { TUserData } from "../types/userTypes";
+import { TLoginUser, TUserData } from "../types/userTypes";
 import bcrypt from "bcrypt";
 import { Users } from "@prisma/client";
 import * as userRepository from "../repositories/userRepository";
@@ -22,6 +22,21 @@ export async function signUp(newUser: TUserData) {
   await userRepository.createNewUser(userData);
 
   return;
+}
+
+export async function signIn(userData: TLoginUser) {
+  const userDB: Users = await getUserByEmail(userData.email);
+  if (userDB === null) throw { type: "unauthorized", message: "Login error" };
+
+  const passwordIsRight: boolean = bcrypt.compareSync(
+    userData.password,
+    userDB.password
+  );
+  if (!passwordIsRight) throw { type: "unauthorized", message: "Login error" };
+
+  //generate token
+
+  return; //token
 }
 
 function passwordHash(password: string) {
