@@ -1,15 +1,16 @@
-import express, { json } from 'express';
-import cors from 'cors';
-import 'express-async-errors';
+import express, { json } from "express";
+import cors from "cors";
+import "express-async-errors";
 
-import router from './routes/index';
-import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
+import router from "./routes/index";
+import errorHandlerMiddleware from "./middlewares/errorHandlerMiddleware";
 
 const app = express();
 
 app.use(json());
 app.use(cors());
 app.use(router);
+app.use("/public", express.static("public"));
 app.use(errorHandlerMiddleware);
 
 export default app;

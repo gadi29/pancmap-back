@@ -9,3 +9,52 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id        Int         @id @default(autoincrement())
+  name      String
+  email     String      @unique
+  password  String
+  superuser Boolean
+  createdAt DateTime    @default(now())
+  Registers Registers[]
+}
+
+model Registers {
+  id           Int      @id @default(autoincrement())
+  title        String
+  coordinates  String
+  user         Users    @relation(fields: [userId], references: [id])
+  userId       Int
+  specie       Species  @relation(fields: [specieId], references: [id])
+  specieId     Int
+  picturePath  String
+  observations String?
+  createdAt    DateTime @default(now())
+}
+
+model Species {
+  id                     Int           @id @default(autoincrement())
+  cientificName          String
+  generalCharacteristics String
+  curiosities            String?
+  leafMorfology          String
+  flowerMorfology        String
+  fruitMorfology         String
+  undergroundMorfology   String
+  leafPicturePath        String
+  flowerPicturePath      String
+  fruitPicturePath       String
+  undergraundPicturePath String?
+  edibleParts            String
+  createdAt              DateTime      @default(now())
+  Registers              Registers[]
+  CommonNames            CommonNames[]
+}
+
+model CommonNames {
+  id       Int     @id @default(autoincrement())
+  name     String
+  specie   Species @relation(fields: [specieId], references: [id])
+  specieId Int
+}
