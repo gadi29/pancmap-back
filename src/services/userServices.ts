@@ -10,7 +10,9 @@ async function getUserByEmail(email: string) {
 }
 
 export async function signUp(newUser: TUserData) {
-  //confirm email
+  const existUserInDB: Users = await getUserByEmail(newUser.email);
+  if (existUserInDB !== null)
+    throw { type: "conflict", message: "This email already exists" };
 
   const userData: TUserData = {
     ...newUser,
