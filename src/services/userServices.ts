@@ -1,5 +1,11 @@
 import { TUserData } from "../types/userTypes";
 import bcrypt from "bcrypt";
+import { Users } from "@prisma/client";
+
+async function getUserByEmail(email: string) {
+  //const user: Users = await ;
+  //return user;
+}
 
 export async function signUp(newUser: TUserData) {
   //confirm email
