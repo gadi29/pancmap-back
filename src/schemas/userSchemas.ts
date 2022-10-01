@@ -7,3 +7,8 @@ export const newUserSchema = Joi.object<TUserData>({
   password: Joi.string().required(),
   superuser: Joi.boolean(),
 });
+
+export const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+});
