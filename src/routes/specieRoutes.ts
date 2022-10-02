@@ -3,6 +3,7 @@ import {
   authenticateSuperuser,
   authenticateUser,
 } from "../middlewares/authenticateUserMiddleware";
+import { cpUpload } from "../middlewares/uploadPicturesMiddleware";
 import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware";
 import specieSchema from "../schemas/specieSchema";
 
@@ -12,6 +13,7 @@ specieRouter.post(
   "/specie",
   authenticateUser,
   authenticateSuperuser,
+  cpUpload,
   validateSchemaMiddleware(specieSchema)
 );
 specieRouter.get("/specie/:id");
