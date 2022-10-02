@@ -12,7 +12,7 @@ const specieSchema = Joi.object<TSpecieData>({
   leafPicturePath: Joi.string().trim().required(),
   flowerPicturePath: Joi.string().trim().required(),
   fruitPicturePath: Joi.string().trim().required(),
-  undergraundPicturePath: Joi.string().trim(),
+  undergroundPicturePath: Joi.string().trim(),
   edibleParts: Joi.string().trim().required(),
 });
 
