@@ -41,8 +41,14 @@ export async function authenticateUser(
   next();
 }
 
-export async function authenticateSuperuser(superuser: boolean) {
-  if (!superuser) throw { type: "unauthorized", message: "Unauthorized" };
+export async function authenticateSuperuser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const user: Users = res.locals.user;
 
-  return;
+  if (!user.superuser) throw { type: "unauthorized", message: "Unauthorized" };
+
+  next();
 }
