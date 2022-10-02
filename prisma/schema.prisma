@@ -45,7 +45,7 @@ model Species {
   leafPicturePath        String
   flowerPicturePath      String
   fruitPicturePath       String
-  undergraundPicturePath String?
+  undergroundPicturePath String?
   edibleParts            String
   createdAt              DateTime      @default(now())
   Registers              Registers[]
