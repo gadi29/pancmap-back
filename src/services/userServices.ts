@@ -1,7 +1,8 @@
-import { TLoginUser, TUserData } from "../types/userTypes";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { Users } from "@prisma/client";
 import * as userRepository from "../repositories/userRepository";
+import { TLoginUser, TSaveUser, TUserData } from "../types/userTypes";
 
 async function getUserByEmail(email: string) {
   const user: Users = await userRepository.findByEmail(email);
@@ -34,9 +35,13 @@ export async function signIn(userData: TLoginUser) {
   );
   if (!passwordIsRight) throw { type: "unauthorized", message: "Login error" };
 
-  //generate token
+  const token: string = generateToken({
+    id: userDB.id,
+    name: userDB.name,
+    superuser: userDB.superuser,
+  });
 
-  return; //token
+  return token;
 }
 
 function passwordHash(password: string) {
@@ -44,4 +49,12 @@ function passwordHash(password: string) {
   const passwordHash: string = bcrypt.hashSync(password, SALT);
 
   return passwordHash;
+}
+
+function generateToken(user: TSaveUser) {
+  const token: string = jwt.sign({ user }, process.env.JWT_SECRET, {
+    expiresIn: "15 days",
+  });
+
+  return token;
 }
