@@ -10,6 +10,12 @@ async function getUserByEmail(email: string) {
   return user;
 }
 
+export async function getUserById(id: number) {
+  const user: Users = await userRepository.findById(id);
+
+  return user;
+}
+
 export async function signUp(newUser: TUserData) {
   const existUserInDB: Users = await getUserByEmail(newUser.email);
   if (existUserInDB !== null)
