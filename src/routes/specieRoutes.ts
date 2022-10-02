@@ -16,7 +16,12 @@ specieRouter.post(
 );
 specieRouter.get("/specie/:id");
 specieRouter.get("/species");
-specieRouter.put("/specie");
-specieRouter.delete("/specie/:id");
+specieRouter.put(
+  "/specie/:id",
+  authenticateUser,
+  authenticateSuperuser,
+  validateSchemaMiddleware(specieSchema)
+);
+specieRouter.delete("/specie/:id", authenticateUser, authenticateSuperuser);
 
 export default specieRouter;
