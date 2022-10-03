@@ -1,13 +1,33 @@
 import { TPicturesPath, TSpecieObj } from "../types/specieType";
+import * as specieRepository from "../repositories/specieRepository";
+import { Species } from "@prisma/client";
 
-export async function createSpecie(specie, pictures: Object) {
-  const picturesPath = createPicturePathObject(pictures);
-  const specieData = createSpecieObject(specie);
+export async function createSpecie(specie: Object, pictures: Object) {
+  const specieData = createSpecieObject(specie, pictures);
 
-  console.log({ ...specieData, ...picturesPath });
+  //conferir se existe a espécie pelo nome
+  const existSpecie = await getSpecieByName(specieData.cientificName);
+  if (existSpecie !== null)
+    throw { type: "conflict", message: "This specie already exists" };
+  //criar no BD
+
+  return;
 }
 
-function createSpecieObject(specie: Object) {
+async function getSpecieByName(name: string) {
+  const specie: Species = await specieRepository.findByName(name);
+
+  return specie;
+}
+
+function createSpecieObject(specie: Object, pictures: Object) {
+  const picturesPath = createPicturePathObject(pictures);
+  const specieTexts = createSpecieTextObject(specie);
+
+  return { ...specieTexts, ...picturesPath };
+}
+
+function createSpecieTextObject(specie: Object) {
   let specieData: TSpecieObj = {
     cientificName: specie["cientific-name"],
     generalCharacteristics: specie["general-characteristics"],
