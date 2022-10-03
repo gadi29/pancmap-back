@@ -1,15 +1,15 @@
-import { TPicturesPath, TSpecieObj } from "../types/specieType";
+import { TSpecieData, TSpeciePaths, TSpecieText } from "../types/specieType";
 import * as specieRepository from "../repositories/specieRepository";
 import { Species } from "@prisma/client";
 
 export async function createSpecie(specie: Object, pictures: Object) {
-  const specieData = createSpecieObject(specie, pictures);
+  const specieData: TSpecieData = createSpecieObject(specie, pictures);
 
-  //conferir se existe a espécie pelo nome
   const existSpecie = await getSpecieByName(specieData.cientificName);
   if (existSpecie !== null)
     throw { type: "conflict", message: "This specie already exists" };
-  //criar no BD
+
+  await specieRepository.createSpecie(specieData);
 
   return;
 }
@@ -28,7 +28,7 @@ function createSpecieObject(specie: Object, pictures: Object) {
 }
 
 function createSpecieTextObject(specie: Object) {
-  let specieData: TSpecieObj = {
+  let specieData: TSpecieText = {
     cientificName: specie["cientific-name"],
     generalCharacteristics: specie["general-characteristics"],
     leafMorfology: specie["leaf-morfology"],
@@ -45,7 +45,7 @@ function createSpecieTextObject(specie: Object) {
 }
 
 function createPicturePathObject(pictures: Object) {
-  let picsPath: TPicturesPath = {
+  let picsPath: TSpeciePaths = {
     leafPicturePath: `/public/uploads/${pictures["leaf-pic"][0].filename}`,
     flowerPicturePath: `/public/uploads/${pictures["flower-pic"][0].filename}`,
     fruitPicturePath: `/public/uploads/${pictures["fruit-pic"][0].filename}`,

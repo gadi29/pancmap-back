@@ -1,15 +1,31 @@
 import { Species } from "@prisma/client";
 
-export type TSpecie = Omit<Species, "id" | "createdAt">;
-
-export type TPicturesPath = Partial<TSpecie>;
-
 export type TSpecieData = Omit<
-  TSpecie,
+  Species,
+  "id" | "createdAt" | "curiosities" | "undergroundPicturePath"
+> & {
+  curiosities?: string;
+  undergroundPicturePath?: string;
+};
+
+export type TSpecieText = Omit<
+  TSpecieData,
   | "leafPicturePath"
   | "flowerPicturePath"
   | "fruitPicturePath"
   | "undergroundPicturePath"
->;
+  | "curiosities"
+> & { curiosities?: string };
 
-export type TSpecieObj = Partial<TSpecieData>;
+export type TSpeciePaths = Omit<
+  TSpecieData,
+  | "cientificName"
+  | "generalCharacteristics"
+  | "curiosities"
+  | "leafMorfology"
+  | "flowerMorfology"
+  | "fruitMorfology"
+  | "undergroundMorfology"
+  | "undergroundPicturePath"
+  | "edibleParts"
+> & { undergroundPicturePath?: string };
