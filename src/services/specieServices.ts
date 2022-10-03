@@ -1,28 +1,36 @@
+import { TPicturesPath, TSpecieObj } from "../types/specieType";
+
 export async function createSpecie(specie, pictures: Object) {
   const picturesPath = createPicturePathObject(pictures);
+  const specieData = createSpecieObject(specie);
 
-  const specieData = JSON.parse(JSON.stringify(specie));
-  console.log(specieData);
+  console.log({ ...specieData, ...picturesPath });
+}
+
+function createSpecieObject(specie: Object) {
+  let specieData: TSpecieObj = {
+    cientificName: specie["cientific-name"],
+    generalCharacteristics: specie["general-characteristics"],
+    leafMorfology: specie["leaf-morfology"],
+    flowerMorfology: specie["flower-morfology"],
+    fruitMorfology: specie["fruit-morfology"],
+    undergroundMorfology: specie["underground-morfology"],
+    edibleParts: specie["edible-parts"],
+  };
+
+  if (specie["curiosities"])
+    specieData = { ...specieData, curiosities: specie["curiosities"] };
+
+  return specieData;
 }
 
 function createPicturePathObject(pictures: Object) {
-  let picsPath = {};
+  let picsPath: TPicturesPath = {
+    leafPicturePath: `/public/uploads/${pictures["leaf-pic"][0].filename}`,
+    flowerPicturePath: `/public/uploads/${pictures["flower-pic"][0].filename}`,
+    fruitPicturePath: `/public/uploads/${pictures["fruit-pic"][0].filename}`,
+  };
 
-  if (pictures["leaf-pic"])
-    picsPath = {
-      ...picsPath,
-      leafPicturePath: `/public/uploads/${pictures["leaf-pic"][0].filename}`,
-    };
-  if (pictures["flower-pic"])
-    picsPath = {
-      ...picsPath,
-      flowerPicturePath: `/public/uploads/${pictures["flower-pic"][0].filename}`,
-    };
-  if (pictures["fruit-pic"])
-    picsPath = {
-      ...picsPath,
-      fruitPicturePath: `/public/uploads/${pictures["fruit-pic"][0].filename}`,
-    };
   if (pictures["underground-pic"])
     picsPath = {
       ...picsPath,
