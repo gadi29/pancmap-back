@@ -1,6 +1,6 @@
 import multer from "multer";
 
-const upload = multer({ dest: "../../public/uploads/" });
+const upload = multer({ dest: "public/uploads/" });
 
 export const cpUpload = upload.fields([
   { name: "leaf-pic", maxCount: 1 },

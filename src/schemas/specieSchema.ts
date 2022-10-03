@@ -9,10 +9,6 @@ const specieSchema = Joi.object<TSpecieData>({
   flowerMorfology: Joi.string().trim().required(),
   fruitMorfology: Joi.string().trim().required(),
   undergroundMorfology: Joi.string().trim().required(),
-  leafPicturePath: Joi.string().trim().required(),
-  flowerPicturePath: Joi.string().trim().required(),
-  fruitPicturePath: Joi.string().trim().required(),
-  undergroundPicturePath: Joi.string().trim(),
   edibleParts: Joi.string().trim().required(),
 });
 

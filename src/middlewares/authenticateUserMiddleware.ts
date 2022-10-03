@@ -2,9 +2,10 @@ import { Users } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { getUserById } from "../services/userServices";
+import { TSaveUser } from "../types/userTypes";
 
 interface IDataJWT {
-  id: number;
+  user: TSaveUser;
   iat: number;
   exp: number;
 }
@@ -12,7 +13,7 @@ interface IDataJWT {
 async function verifyJWTFunction(error, data: IDataJWT) {
   if (error) throw { type: "unauthorized", message: "Unauthorized" };
 
-  const user: Users = await getUserById(data.id);
+  const user: Users = await getUserById(data.user.id);
   if (user === null) throw { type: "not_found", message: "User not found" };
 
   return user;

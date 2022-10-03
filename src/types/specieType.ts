@@ -1,3 +1,11 @@
 import { Species } from "@prisma/client";
 
-export type TSpecieData = Omit<Species, "id" | "createdAt">;
+export type TSpecie = Omit<Species, "id" | "createdAt">;
+
+export type TSpecieData = Omit<
+  TSpecie,
+  | "leafPicturePath"
+  | "flowerPicturePath"
+  | "fruitPicturePath"
+  | "undergroundPicturePath"
+>;

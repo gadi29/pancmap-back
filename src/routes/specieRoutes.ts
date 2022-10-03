@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { createSpecie } from "../controllers/specieControllers";
 import {
   authenticateSuperuser,
   authenticateUser,
@@ -9,13 +10,7 @@ import specieSchema from "../schemas/specieSchema";
 
 const specieRouter = Router();
 
-specieRouter.post(
-  "/specie",
-  authenticateUser,
-  authenticateSuperuser,
-  cpUpload,
-  validateSchemaMiddleware(specieSchema)
-);
+specieRouter.post("/specie", cpUpload, createSpecie);
 specieRouter.get("/specie/:id");
 specieRouter.get("/species");
 specieRouter.put(
