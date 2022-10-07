@@ -2,7 +2,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Users } from "@prisma/client";
 import * as userRepository from "../repositories/userRepository";
-import { TLoginUser, TSaveUser, TUserData } from "../types/userTypes";
+import {
+  TLoginUser,
+  TSaveUser,
+  TUserData,
+  TUserDataCP,
+} from "../types/userTypes";
 
 async function getUserByEmail(email: string) {
   const user: Users = await userRepository.findByEmail(email);
@@ -16,13 +21,14 @@ export async function getUserById(id: number) {
   return user;
 }
 
-export async function signUp(newUser: TUserData) {
+export async function signUp(newUser: TUserDataCP) {
   const existUserInDB: Users = await getUserByEmail(newUser.email);
   if (existUserInDB !== null)
     throw { type: "conflict", message: "This email already exists" };
 
   const userData: TUserData = {
-    ...newUser,
+    name: newUser.name,
+    email: newUser.email,
     password: passwordHash(newUser.password),
   };
 

@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import * as userServices from "../services/userServices";
-import { TLoginUser, TUserData } from "../types/userTypes";
+import { TLoginUser, TUserData, TUserDataCP } from "../types/userTypes";
 
 export async function signUp(req: Request, res: Response) {
-  const newUser: TUserData = req.body;
+  const newUser: TUserDataCP = req.body;
 
   await userServices.signUp(newUser);
   res.status(201).send("User registered successfully");
