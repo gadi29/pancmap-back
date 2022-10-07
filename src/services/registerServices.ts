@@ -2,7 +2,7 @@ import { TRegister, TRegisterData } from "../types/registerType";
 import * as registerRepository from "../repositories/registerRepository";
 import { getSpecieById } from "./specieServices";
 import { getUserById } from "./userServices";
-import { Users } from "@prisma/client";
+import { Registers, Users } from "@prisma/client";
 
 export async function createRegister(register: TRegisterData, id: number) {
   await getSpecieById(register.specieId);
@@ -17,4 +17,13 @@ export async function createRegister(register: TRegisterData, id: number) {
   await registerRepository.createRegister(registerData);
 
   return;
+}
+
+export async function getSpecieRegisters(specieId: number) {
+  await getSpecieById(specieId);
+  const registers: Registers[] = await registerRepository.getSpecieRegisters(
+    specieId
+  );
+
+  return registers;
 }

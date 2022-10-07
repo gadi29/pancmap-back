@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { TRegisterData } from "../types/registerType";
 import * as registerServices from "../services/registerServices";
+import { Registers } from "@prisma/client";
 
 export async function createRegister(req: Request, res: Response) {
   const register: TRegisterData = req.body;
@@ -8,4 +9,13 @@ export async function createRegister(req: Request, res: Response) {
 
   await registerServices.createRegister(register, id);
   res.status(201).send("Register registered successfully");
+}
+
+export async function getSpecieRegisters(req: Request, res: Response) {
+  const specieId: number = +req.params.id;
+
+  const registers: Registers[] = await registerServices.getSpecieRegisters(
+    specieId
+  );
+  res.status(200).send(registers);
 }

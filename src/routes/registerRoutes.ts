@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createRegister } from "../controllers/registerControllers";
+import {
+  createRegister,
+  getSpecieRegisters,
+} from "../controllers/registerControllers";
 import { authenticateUser } from "../middlewares/authenticateUserMiddleware";
 import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware";
 import registerSchema from "../schemas/registerSchema";
@@ -12,7 +15,7 @@ registerRouter.post(
   validateSchemaMiddleware(registerSchema),
   createRegister
 );
-registerRouter.get("/registers");
+registerRouter.get("/registers/:id", getSpecieRegisters);
 registerRouter.put(
   "/register/:id",
   authenticateUser,
