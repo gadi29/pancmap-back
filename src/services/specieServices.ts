@@ -29,6 +29,12 @@ async function getSpecieByName(name: string) {
 export async function getSpecieById(id: number) {
   const specie: Species = await specieRepository.findById(id);
 
+  if (specie === null)
+    throw {
+      type: "not_found",
+      message: "Este id não está cadastrado no banco de dados",
+    };
+
   return specie;
 }
 
