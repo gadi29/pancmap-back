@@ -28,3 +28,11 @@ export async function updateRegister(req: Request, res: Response) {
   await registerServices.upadateRegister(registerData, registerId, userId);
   res.status(200).send("Register successfully updated");
 }
+
+export async function deleteRegister(req: Request, res: Response) {
+  const registerId: number = +req.params.id;
+  const userId: number = +res.locals.user.id;
+
+  await registerServices.deleteRegister(registerId, userId);
+  res.status(200).send("Register deleted successfully");
+}

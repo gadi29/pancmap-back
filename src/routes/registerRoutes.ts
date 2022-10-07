@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createRegister,
+  deleteRegister,
   getSpecieRegisters,
   updateRegister,
 } from "../controllers/registerControllers";
@@ -23,6 +24,6 @@ registerRouter.put(
   validateSchemaMiddleware(registerSchema),
   updateRegister
 );
-registerRouter.delete("/register/:id", authenticateUser);
+registerRouter.delete("/register/:id", authenticateUser, deleteRegister);
 
 export default registerRouter;

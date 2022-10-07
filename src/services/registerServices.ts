@@ -54,3 +54,24 @@ export async function upadateRegister(
 
   return;
 }
+
+export async function deleteRegister(registerId: number, userId: number) {
+  const completeRegister: Registers = await registerRepository.getRegisterById(
+    registerId
+  );
+
+  if (completeRegister === null) {
+    throw {
+      type: "not_found",
+      message: "Registro não encontrado",
+    };
+  }
+
+  if (completeRegister.userId !== userId) {
+    throw { type: "unauthorized", message: "Unauthorized" };
+  }
+
+  await registerRepository.deleteRegister(registerId);
+
+  return;
+}
