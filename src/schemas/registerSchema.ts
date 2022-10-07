@@ -3,10 +3,9 @@ import { TRegisterData } from "../types/registerType";
 
 const registerSchema = Joi.object<TRegisterData>({
   title: Joi.string().required(),
-  coordinates: Joi.string().required(),
-  userId: Joi.number().required(),
+  longitude: Joi.string().required(),
+  latitude: Joi.string().required(),
   specieId: Joi.number().required(),
-  picturePath: Joi.string(), //tirar
   observations: Joi.string(),
 });
 

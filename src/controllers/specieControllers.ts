@@ -1,7 +1,7 @@
 import { Species } from "@prisma/client";
 import { Request, Response } from "express";
 import * as specieServices from "../services/specieServices";
-import { TSpecieData, TSpecieText } from "../types/specieType";
+import { TSpecieText } from "../types/specieType";
 
 export async function createSpecie(req: Request, res: Response) {
   const specieData: Object = req.body;
