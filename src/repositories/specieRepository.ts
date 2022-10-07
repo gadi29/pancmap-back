@@ -13,3 +13,14 @@ export async function findByName(name: string) {
 export async function createSpecie(specie: TSpecieData) {
   await prisma.species.create({ data: specie });
 }
+
+export async function getAllCientificNameSpecies() {
+  const species = await prisma.species.findMany({
+    select: {
+      id: true,
+      cientificName: true,
+    },
+  });
+
+  return species;
+}

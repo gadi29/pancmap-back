@@ -14,6 +14,12 @@ export async function createSpecie(specie: Object, pictures: Object) {
   return;
 }
 
+export async function getAllCientificNameSpecies() {
+  const species = await specieRepository.getAllCientificNameSpecies();
+
+  return species;
+}
+
 async function getSpecieByName(name: string) {
   const specie: Species = await specieRepository.findByName(name);
 

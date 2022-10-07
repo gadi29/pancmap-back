@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createSpecie } from "../controllers/specieControllers";
+import { createSpecie, getAllSpecies } from "../controllers/specieControllers";
 import {
   authenticateSuperuser,
   authenticateUser,
@@ -12,7 +12,7 @@ const specieRouter = Router();
 
 specieRouter.post("/specie", cpUpload, createSpecie);
 specieRouter.get("/specie/:id");
-specieRouter.get("/species");
+specieRouter.get("/species", getAllSpecies);
 specieRouter.put(
   "/specie/:id",
   authenticateUser,
