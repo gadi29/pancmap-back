@@ -27,3 +27,30 @@ export async function getSpecieRegisters(specieId: number) {
 
   return registers;
 }
+
+export async function upadateRegister(
+  register: TRegisterData,
+  registerId: number,
+  userId: number
+) {
+  const completeRegister: Registers = await registerRepository.getRegisterById(
+    registerId
+  );
+
+  if (completeRegister === null) {
+    throw {
+      type: "not_found",
+      message: "Registro não encontrado",
+    };
+  }
+
+  if (completeRegister.userId !== userId) {
+    throw { type: "unauthorized", message: "Unauthorized" };
+  }
+
+  await getSpecieById(register.specieId);
+
+  await registerRepository.updateRegister(register, registerId);
+
+  return;
+}

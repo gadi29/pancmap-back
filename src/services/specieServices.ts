@@ -32,7 +32,7 @@ export async function getSpecieById(id: number) {
   if (specie === null)
     throw {
       type: "not_found",
-      message: "Espécie não cadastrada no banco de dados",
+      message: "Espécie não encontrada",
     };
 
   return specie;

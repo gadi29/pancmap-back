@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createRegister,
   getSpecieRegisters,
+  updateRegister,
 } from "../controllers/registerControllers";
 import { authenticateUser } from "../middlewares/authenticateUserMiddleware";
 import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware";
@@ -19,7 +20,8 @@ registerRouter.get("/registers/:id", getSpecieRegisters);
 registerRouter.put(
   "/register/:id",
   authenticateUser,
-  validateSchemaMiddleware(registerSchema)
+  validateSchemaMiddleware(registerSchema),
+  updateRegister
 );
 registerRouter.delete("/register/:id", authenticateUser);
 

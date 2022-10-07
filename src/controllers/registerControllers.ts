@@ -19,3 +19,12 @@ export async function getSpecieRegisters(req: Request, res: Response) {
   );
   res.status(200).send(registers);
 }
+
+export async function updateRegister(req: Request, res: Response) {
+  const registerData: TRegisterData = req.body;
+  const registerId: number = +req.params.id;
+  const userId: number = +res.locals.user.id;
+
+  await registerServices.upadateRegister(registerData, registerId, userId);
+  res.status(200).send("Register successfully updated");
+}
