@@ -53,7 +53,7 @@ export async function signIn(userData: TLoginUser) {
     superuser: userDB.superuser,
   });
 
-  return token;
+  return { token, user: userDB };
 }
 
 function passwordHash(password: string) {
