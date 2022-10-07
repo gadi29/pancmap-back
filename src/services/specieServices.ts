@@ -44,6 +44,13 @@ export async function updateSpecie(specie: TSpecieText, id: number) {
   return;
 }
 
+export async function deleteSpecie(id: number) {
+  const specie: Species = await getSpecieById(id);
+  await specieRepository.deleteSpecieById(id);
+
+  return;
+}
+
 function createSpecieObject(specie: Object, pictures: Object) {
   const picturesPath = createPicturePathObject(pictures);
   const specieTexts = createSpecieTextObject(specie);

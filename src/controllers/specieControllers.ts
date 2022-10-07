@@ -30,3 +30,10 @@ export async function updateSpecie(req: Request, res: Response) {
   await specieServices.updateSpecie(specie, id);
   res.status(200).send("Specie successfully updated");
 }
+
+export async function deleteSpecie(req: Request, res: Response) {
+  const id: number = +req.params.id;
+
+  await specieServices.deleteSpecie(id);
+  res.status(200).send("Specie deleted successfully");
+}

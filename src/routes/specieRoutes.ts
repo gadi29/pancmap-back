@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createSpecie,
+  deleteSpecie,
   getAllSpecies,
   getSpecie,
   updateSpecie,
@@ -25,6 +26,11 @@ specieRouter.put(
   validateSchemaMiddleware(specieSchema),
   updateSpecie
 );
-specieRouter.delete("/specie/:id", authenticateUser, authenticateSuperuser);
+specieRouter.delete(
+  "/specie/:id",
+  authenticateUser,
+  authenticateSuperuser,
+  deleteSpecie
+);
 
 export default specieRouter;

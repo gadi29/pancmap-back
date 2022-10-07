@@ -46,3 +46,7 @@ export async function updateSpecie(specie: TSpecieText, id: number) {
     },
   });
 }
+
+export async function deleteSpecieById(id: number) {
+  await prisma.species.delete({ where: { id } });
+}
