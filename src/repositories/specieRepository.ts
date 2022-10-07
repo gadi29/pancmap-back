@@ -10,6 +10,12 @@ export async function findByName(name: string) {
   return specie;
 }
 
+export async function findById(id: number) {
+  const specie: Species = await prisma.species.findUnique({ where: { id } });
+
+  return specie;
+}
+
 export async function createSpecie(specie: TSpecieData) {
   await prisma.species.create({ data: specie });
 }

@@ -26,6 +26,12 @@ async function getSpecieByName(name: string) {
   return specie;
 }
 
+export async function getSpecieById(id: number) {
+  const specie: Species = await specieRepository.findById(id);
+
+  return specie;
+}
+
 function createSpecieObject(specie: Object, pictures: Object) {
   const picturesPath = createPicturePathObject(pictures);
   const specieTexts = createSpecieTextObject(specie);

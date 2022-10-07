@@ -14,3 +14,10 @@ export async function getAllSpecies(req: Request, res: Response) {
   const species = await specieServices.getAllCientificNameSpecies();
   res.status(200).send(species);
 }
+
+export async function getSpecie(req: Request, res: Response) {
+  const id: number = +req.params.id;
+
+  const specie: Species = await specieServices.getSpecieById(id);
+  res.status(200).send(specie);
+}
