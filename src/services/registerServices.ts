@@ -25,6 +25,14 @@ export async function getAllRegisters() {
   return registers;
 }
 
+export async function getUserRegisters(userId: number) {
+  const registers: Registers[] = await registerRepository.getUserRegisters(
+    userId
+  );
+
+  return registers;
+}
+
 export async function getSpecieRegisters(specieId: number) {
   await getSpecieById(specieId);
   const registers: Registers[] = await registerRepository.getSpecieRegisters(

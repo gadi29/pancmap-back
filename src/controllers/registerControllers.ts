@@ -17,6 +17,15 @@ export async function getAllRegisters(req: Request, res: Response) {
   res.status(200).send(registers);
 }
 
+export async function getuserRegisters(req: Request, res: Response) {
+  const userId: number = +req.params.id;
+  const registers: Registers[] = await registerServices.getUserRegisters(
+    userId
+  );
+
+  res.status(200).send(registers);
+}
+
 export async function getSpecieRegisters(req: Request, res: Response) {
   const specieId: number = +req.params.id;
 
