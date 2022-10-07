@@ -6,6 +6,12 @@ export async function createRegister(register: TRegister) {
   await prisma.registers.create({ data: register });
 }
 
+export async function getAllRegisters() {
+  const registers: Registers[] = await prisma.registers.findMany();
+
+  return registers;
+}
+
 export async function getSpecieRegisters(specieId: number) {
   const registers: Registers[] = await prisma.registers.findMany({
     where: { specieId },

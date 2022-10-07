@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createRegister,
   deleteRegister,
+  getAllRegisters,
   getSpecieRegisters,
   updateRegister,
 } from "../controllers/registerControllers";
@@ -17,6 +18,7 @@ registerRouter.post(
   validateSchemaMiddleware(registerSchema),
   createRegister
 );
+registerRouter.get("/registers", getAllRegisters);
 registerRouter.get("/registers/:id", getSpecieRegisters);
 registerRouter.put(
   "/register/:id",

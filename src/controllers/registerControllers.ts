@@ -11,6 +11,12 @@ export async function createRegister(req: Request, res: Response) {
   res.status(201).send("Register registered successfully");
 }
 
+export async function getAllRegisters(req: Request, res: Response) {
+  const registers: Registers[] = await registerServices.getAllRegisters();
+
+  res.status(200).send(registers);
+}
+
 export async function getSpecieRegisters(req: Request, res: Response) {
   const specieId: number = +req.params.id;
 
@@ -25,7 +31,7 @@ export async function updateRegister(req: Request, res: Response) {
   const registerId: number = +req.params.id;
   const userId: number = +res.locals.user.id;
 
-  await registerServices.upadateRegister(registerData, registerId, userId);
+  await registerServices.updateRegister(registerData, registerId, userId);
   res.status(200).send("Register successfully updated");
 }
 

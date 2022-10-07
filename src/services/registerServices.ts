@@ -19,6 +19,12 @@ export async function createRegister(register: TRegisterData, id: number) {
   return;
 }
 
+export async function getAllRegisters() {
+  const registers: Registers[] = await registerRepository.getAllRegisters();
+
+  return registers;
+}
+
 export async function getSpecieRegisters(specieId: number) {
   await getSpecieById(specieId);
   const registers: Registers[] = await registerRepository.getSpecieRegisters(
@@ -28,7 +34,7 @@ export async function getSpecieRegisters(specieId: number) {
   return registers;
 }
 
-export async function upadateRegister(
+export async function updateRegister(
   register: TRegisterData,
   registerId: number,
   userId: number
