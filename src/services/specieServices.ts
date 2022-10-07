@@ -38,6 +38,12 @@ export async function getSpecieById(id: number) {
   return specie;
 }
 
+export async function updateSpecie(specie: TSpecieText, id: number) {
+  await specieRepository.updateSpecie(specie, id);
+
+  return;
+}
+
 function createSpecieObject(specie: Object, pictures: Object) {
   const picturesPath = createPicturePathObject(pictures);
   const specieTexts = createSpecieTextObject(specie);

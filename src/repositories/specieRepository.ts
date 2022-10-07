@@ -1,6 +1,6 @@
 import { Species } from "@prisma/client";
 import prisma from "../config/database";
-import { TSpecieData } from "../types/specieType";
+import { TSpecieData, TSpecieText } from "../types/specieType";
 
 export async function findByName(name: string) {
   const specie: Species = await prisma.species.findUnique({
@@ -29,4 +29,20 @@ export async function getAllCientificNameSpecies() {
   });
 
   return species;
+}
+
+export async function updateSpecie(specie: TSpecieText, id: number) {
+  await prisma.species.update({
+    where: { id },
+    data: {
+      cientificName: specie.cientificName,
+      generalCharacteristics: specie.generalCharacteristics,
+      curiosities: specie.curiosities,
+      leafMorfology: specie.leafMorfology,
+      flowerMorfology: specie.flowerMorfology,
+      fruitMorfology: specie.fruitMorfology,
+      undergroundMorfology: specie.undergroundMorfology,
+      edibleParts: specie.edibleParts,
+    },
+  });
 }

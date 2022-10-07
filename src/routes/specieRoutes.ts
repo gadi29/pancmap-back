@@ -3,6 +3,7 @@ import {
   createSpecie,
   getAllSpecies,
   getSpecie,
+  updateSpecie,
 } from "../controllers/specieControllers";
 import {
   authenticateSuperuser,
@@ -21,7 +22,8 @@ specieRouter.put(
   "/specie/:id",
   authenticateUser,
   authenticateSuperuser,
-  validateSchemaMiddleware(specieSchema)
+  validateSchemaMiddleware(specieSchema),
+  updateSpecie
 );
 specieRouter.delete("/specie/:id", authenticateUser, authenticateSuperuser);
 
