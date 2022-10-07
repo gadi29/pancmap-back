@@ -4,7 +4,7 @@ import * as registerServices from "../services/registerServices";
 
 export async function createRegister(req: Request, res: Response) {
   const register: TRegisterData = req.body;
-  const { id } = res.locals.user;
+  const id: number = res.locals.user.id;
 
   await registerServices.createRegister(register, id);
   res.status(201).send("Register registered successfully");
