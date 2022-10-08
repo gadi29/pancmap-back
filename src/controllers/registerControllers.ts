@@ -19,9 +19,7 @@ export async function getAllRegisters(req: Request, res: Response) {
 
 export async function getuserRegisters(req: Request, res: Response) {
   const userId: number = +req.params.id;
-  const registers: Registers[] = await registerServices.getUserRegisters(
-    userId
-  );
+  const registers = await registerServices.getUserRegisters(userId);
 
   res.status(200).send(registers);
 }

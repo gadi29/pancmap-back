@@ -26,9 +26,7 @@ export async function getAllRegisters() {
 }
 
 export async function getUserRegisters(userId: number) {
-  const registers: Registers[] = await registerRepository.getUserRegisters(
-    userId
-  );
+  const registers = await registerRepository.getUserRegisters(userId);
 
   return registers;
 }

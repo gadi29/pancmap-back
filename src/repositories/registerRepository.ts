@@ -13,8 +13,19 @@ export async function getAllRegisters() {
 }
 
 export async function getUserRegisters(userId: number) {
-  const registers: Registers[] = await prisma.registers.findMany({
+  const registers = await prisma.registers.findMany({
     where: { userId },
+    select: {
+      title: true,
+      longitude: true,
+      latitude: true,
+      observations: true,
+      specie: {
+        select: {
+          cientificName: true,
+        },
+      },
+    },
   });
 
   return registers;
