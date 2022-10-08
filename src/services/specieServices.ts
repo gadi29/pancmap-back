@@ -1,6 +1,7 @@
 import { TSpecieData, TSpeciePaths, TSpecieText } from "../types/specieType";
 import * as specieRepository from "../repositories/specieRepository";
 import { Species } from "@prisma/client";
+import { getSpecieRegisters } from "./registerServices";
 
 export async function createSpecie(specie: Object, pictures: Object) {
   const specieData: TSpecieData = createSpecieObject(specie, pictures);
@@ -46,6 +47,14 @@ export async function updateSpecie(specie: TSpecieText, id: number) {
 
 export async function deleteSpecie(id: number) {
   const specie: Species = await getSpecieById(id);
+  const specieRegisters = await getSpecieRegisters(id);
+
+  if (specieRegisters !== null)
+    throw {
+      type: "conflict",
+      message: "Existem registros cadastrados para esta espécie",
+    };
+
   await specieRepository.deleteSpecieById(id);
 
   return;
