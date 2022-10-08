@@ -40,10 +40,8 @@ export async function getSpecieRegisters(specieId: number) {
   return registers;
 }
 
-export async function getRegisterById(registerId: number) {
-  const register: Registers = await registerRepository.getRegisterById(
-    registerId
-  );
+export async function getRegisterWithSpecie(registerId: number) {
+  const register = await registerRepository.getRegisterWithSpecie(registerId);
 
   if (register === null) {
     throw {

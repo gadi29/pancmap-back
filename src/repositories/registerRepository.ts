@@ -48,6 +48,26 @@ export async function getRegisterById(id: number) {
   return register;
 }
 
+export async function getRegisterWithSpecie(id: number) {
+  const register = await prisma.registers.findUnique({
+    where: { id },
+    select: {
+      title: true,
+      latitude: true,
+      longitude: true,
+      observations: true,
+      specie: {
+        select: {
+          id: true,
+          cientificName: true,
+        },
+      },
+    },
+  });
+
+  return register;
+}
+
 export async function updateRegister(register: TRegisterData, id: number) {
   await prisma.registers.update({
     where: { id },

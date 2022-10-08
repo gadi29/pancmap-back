@@ -36,9 +36,7 @@ export async function getSpecieRegisters(req: Request, res: Response) {
 export async function getRegister(req: Request, res: Response) {
   const registerId: number = +req.params.id;
 
-  const register: Registers = await registerServices.getRegisterById(
-    registerId
-  );
+  const register = await registerServices.getRegisterWithSpecie(registerId);
   res.status(200).send(register);
 }
 
