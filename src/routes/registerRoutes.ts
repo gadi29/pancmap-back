@@ -3,6 +3,7 @@ import {
   createRegister,
   deleteRegister,
   getAllRegisters,
+  getRegister,
   getSpecieRegisters,
   getUserRegisters,
   updateRegister,
@@ -22,7 +23,7 @@ registerRouter.post(
 registerRouter.get("/registers", getAllRegisters);
 registerRouter.get("/myregisters/:id", getUserRegisters);
 registerRouter.get("/registers/:id", getSpecieRegisters);
-// registerRouter.get("/register/:id", getRegister)
+registerRouter.get("/register/:id", getRegister);
 registerRouter.put(
   "/register/:id",
   authenticateUser,
