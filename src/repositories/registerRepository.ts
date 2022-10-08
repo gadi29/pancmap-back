@@ -16,6 +16,7 @@ export async function getUserRegisters(userId: number) {
   const registers = await prisma.registers.findMany({
     where: { userId },
     select: {
+      id: true,
       title: true,
       longitude: true,
       latitude: true,

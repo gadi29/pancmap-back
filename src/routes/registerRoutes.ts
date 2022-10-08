@@ -4,7 +4,7 @@ import {
   deleteRegister,
   getAllRegisters,
   getSpecieRegisters,
-  getuserRegisters,
+  getUserRegisters,
   updateRegister,
 } from "../controllers/registerControllers";
 import { authenticateUser } from "../middlewares/authenticateUserMiddleware";
@@ -20,8 +20,9 @@ registerRouter.post(
   createRegister
 );
 registerRouter.get("/registers", getAllRegisters);
-registerRouter.get("/myregisters/:id", getuserRegisters);
+registerRouter.get("/myregisters/:id", getUserRegisters);
 registerRouter.get("/registers/:id", getSpecieRegisters);
+// registerRouter.get("/register/:id", getRegister)
 registerRouter.put(
   "/register/:id",
   authenticateUser,

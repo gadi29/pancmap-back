@@ -40,6 +40,21 @@ export async function getSpecieRegisters(specieId: number) {
   return registers;
 }
 
+export async function getRegisterById(registerId: number) {
+  const register: Registers = await registerRepository.getRegisterById(
+    registerId
+  );
+
+  if (register === null) {
+    throw {
+      type: "not_found",
+      message: "Registro não encontrado",
+    };
+  }
+
+  return register;
+}
+
 export async function updateRegister(
   register: TRegisterData,
   registerId: number,

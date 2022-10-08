@@ -17,7 +17,7 @@ export async function getAllRegisters(req: Request, res: Response) {
   res.status(200).send(registers);
 }
 
-export async function getuserRegisters(req: Request, res: Response) {
+export async function getUserRegisters(req: Request, res: Response) {
   const userId: number = +req.params.id;
   const registers = await registerServices.getUserRegisters(userId);
 
@@ -31,6 +31,15 @@ export async function getSpecieRegisters(req: Request, res: Response) {
     specieId
   );
   res.status(200).send(registers);
+}
+
+export async function getRegister(req: Request, res: Response) {
+  const registerId: number = +req.params.id;
+
+  const register: Registers = await registerServices.getRegisterById(
+    registerId
+  );
+  res.status(200).send(register);
 }
 
 export async function updateRegister(req: Request, res: Response) {
