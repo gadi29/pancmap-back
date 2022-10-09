@@ -40,11 +40,11 @@ model Species {
   curiosities            String?
   leafMorfology          String
   flowerMorfology        String
-  fruitMorfology         String
-  undergroundMorfology   String
+  fruitMorfology         String?
+  undergroundMorfology   String?
   leafPicturePath        String
   flowerPicturePath      String
-  fruitPicturePath       String
+  fruitPicturePath       String?
   undergroundPicturePath String?
   edibleParts            String
   createdAt              DateTime      @default(now())

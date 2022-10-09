@@ -3,14 +3,14 @@ import * as specieRepository from "../repositories/specieRepository";
 import { Registers, Species } from "@prisma/client";
 import { getSpecieRegisters } from "./registerServices";
 
-export async function createSpecie(specie: Object, pictures: Object) {
-  const specieData: TSpecieData = createSpecieObject(specie, pictures);
+export async function createSpecie(specie: TSpecieData) {
+  //const specieData: TSpecieData = createSpecieObject(specie);
 
-  const existSpecie = await getSpecieByName(specieData.cientificName);
+  const existSpecie = await getSpecieByName(specie.cientificName);
   if (existSpecie !== null)
     throw { type: "conflict", message: "This specie already exists" };
 
-  await specieRepository.createSpecie(specieData);
+  await specieRepository.createSpecie(specie);
 
   return;
 }

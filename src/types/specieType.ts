@@ -2,10 +2,19 @@ import { Species } from "@prisma/client";
 
 export type TSpecieData = Omit<
   Species,
-  "id" | "createdAt" | "curiosities" | "undergroundPicturePath"
+  | "id"
+  | "createdAt"
+  | "curiosities"
+  | "fruitMorfology"
+  | "undergroundMorfology"
+  | "fruitPicturePath"
+  | "undergroundPicturePath"
 > & {
   curiosities?: string;
   undergroundPicturePath?: string;
+  fruitMorfology?: string;
+  undergroundMorfology?: string;
+  fruitPicturePath?: string;
 };
 
 export type TSpecieText = Omit<

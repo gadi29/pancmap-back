@@ -1,13 +1,13 @@
 import { Species } from "@prisma/client";
 import { Request, Response } from "express";
 import * as specieServices from "../services/specieServices";
-import { TSpecieText } from "../types/specieType";
+import { TSpecieData, TSpecieText } from "../types/specieType";
 
 export async function createSpecie(req: Request, res: Response) {
-  const specieData: Object = req.body;
-  const pictures: Object = req.files;
+  const specieData: TSpecieData = req.body;
+  // const pictures: Object = req.files;
 
-  await specieServices.createSpecie(specieData, pictures);
+  await specieServices.createSpecie(specieData);
   res.status(201).send("Specie registered successfully");
 }
 

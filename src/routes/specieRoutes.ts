@@ -10,13 +10,18 @@ import {
   authenticateSuperuser,
   authenticateUser,
 } from "../middlewares/authenticateUserMiddleware";
-import { cpUpload } from "../middlewares/uploadPicturesMiddleware";
+// import { cpUpload } from "../middlewares/uploadPicturesMiddleware";
 import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware";
 import specieSchema from "../schemas/specieSchema";
 
 const specieRouter = Router();
 
-specieRouter.post("/specie", cpUpload, createSpecie);
+specieRouter.post(
+  "/specie",
+  authenticateUser,
+  authenticateSuperuser,
+  createSpecie
+);
 specieRouter.get("/specie/:id", getSpecie);
 specieRouter.get("/species", getAllSpecies);
 specieRouter.put(
