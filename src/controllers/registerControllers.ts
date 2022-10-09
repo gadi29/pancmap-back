@@ -12,7 +12,7 @@ export async function createRegister(req: Request, res: Response) {
 }
 
 export async function getAllRegisters(req: Request, res: Response) {
-  const registers: Registers[] = await registerServices.getAllRegisters();
+  const registers = await registerServices.getAllRegisters();
 
   res.status(200).send(registers);
 }

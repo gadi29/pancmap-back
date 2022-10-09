@@ -20,7 +20,7 @@ export async function createRegister(register: TRegisterData, id: number) {
 }
 
 export async function getAllRegisters() {
-  const registers: Registers[] = await registerRepository.getAllRegisters();
+  const registers = await registerRepository.getAllRegisters();
 
   return registers;
 }

@@ -7,7 +7,20 @@ export async function createRegister(register: TRegister) {
 }
 
 export async function getAllRegisters() {
-  const registers: Registers[] = await prisma.registers.findMany();
+  const registers = await prisma.registers.findMany({
+    select: {
+      title: true,
+      longitude: true,
+      latitude: true,
+      observations: true,
+      specie: {
+        select: {
+          id: true,
+          cientificName: true,
+        },
+      },
+    },
+  });
 
   return registers;
 }
