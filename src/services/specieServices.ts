@@ -39,7 +39,7 @@ export async function getSpecieById(id: number) {
   return specie;
 }
 
-export async function updateSpecie(specie: TSpecieText, id: number) {
+export async function updateSpecie(specie: TSpecieData, id: number) {
   await specieRepository.updateSpecie(specie, id);
 
   return;

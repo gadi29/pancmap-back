@@ -31,19 +31,10 @@ export async function getAllCientificNameSpecies() {
   return species;
 }
 
-export async function updateSpecie(specie: TSpecieText, id: number) {
+export async function updateSpecie(specie: TSpecieData, id: number) {
   await prisma.species.update({
     where: { id },
-    data: {
-      cientificName: specie.cientificName,
-      generalCharacteristics: specie.generalCharacteristics,
-      curiosities: specie.curiosities,
-      leafMorfology: specie.leafMorfology,
-      flowerMorfology: specie.flowerMorfology,
-      fruitMorfology: specie.fruitMorfology,
-      undergroundMorfology: specie.undergroundMorfology,
-      edibleParts: specie.edibleParts,
-    },
+    data: specie,
   });
 }
 

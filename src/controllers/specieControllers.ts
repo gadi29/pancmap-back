@@ -25,7 +25,7 @@ export async function getSpecie(req: Request, res: Response) {
 
 export async function updateSpecie(req: Request, res: Response) {
   const id: number = +req.params.id;
-  const specie: TSpecieText = req.body;
+  const specie: TSpecieData = req.body;
 
   await specieServices.updateSpecie(specie, id);
   res.status(200).send("Specie successfully updated");

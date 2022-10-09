@@ -20,6 +20,7 @@ specieRouter.post(
   "/specie",
   authenticateUser,
   authenticateSuperuser,
+  validateSchemaMiddleware(specieSchema),
   createSpecie
 );
 specieRouter.get("/specie/:id", getSpecie);
