@@ -20,7 +20,7 @@ Um projeto para gerenciamento de registros e localização de plantas alimentíc
 
 # Descrição
 
-PANC Map é uma API que gerencia o armazenamento de informações de PANC e suas lozalizações, feito para interessados no consumo ou para entusiastas de botânica que desejam registrar as espécies.
+PANC Map é uma API que gerencia o armazenamento de informações de PANC's e suas lozalizações, feito para interessados no consumo ou para entusiastas de botânica que desejam registrar as espécies.
 
 </br>
 
@@ -34,8 +34,6 @@ PANC Map é uma API que gerencia o armazenamento de informações de PANC e suas
 </br>
 
 ## API Reference
-
-</br>
 
 ### Cadastrar usuário
 
