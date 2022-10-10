@@ -19,6 +19,11 @@ export async function getAllRegisters() {
           cientificName: true,
         },
       },
+      user: {
+        select: {
+          name: true,
+        }
+      }
     },
   });
 

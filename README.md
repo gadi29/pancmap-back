@@ -321,11 +321,14 @@ GET /registers
     "longitude": "string",
     "latitude": "string",
     "observations": "string",
+    "user": {
+        "name": "string",
+    },
     "specie": {
       "id": "number",
       "cientificName": "string"
-    }
-  }
+    },
+  },
 ]
 ```
 
