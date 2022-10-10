@@ -306,6 +306,31 @@ POST /register
 
 #
 
+### Obter todos os registros
+
+```http
+GET /registers
+```
+
+#### Response:
+
+```json
+[
+  {
+    "title": "string",
+    "longitude": "string",
+    "latitude": "string",
+    "observations": "string",
+    "specie": {
+      "id": "number",
+      "cientificName": "string"
+    }
+  }
+]
+```
+
+#
+
 ### Obter registros do usuário
 
 ```http
