@@ -491,6 +491,10 @@ Para o funcionamento desta API é necessário adicionar as seguintes variáveis 
 
 `JWT_SECRET = qualquer chave para gerar o token`
 
+Para os testes de integração é necessário o arquivo .env.test.local, com a seguinte variável de ambiente:
+
+`DATABASE_URL = postgres://UserName:Password@Hostname:5432/DatabaseName_test`
+
 </br>
 
 ## Agradecimentos
