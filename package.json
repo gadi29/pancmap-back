@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc && npx prisma migrate deploy",
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts",
-    "test": "dotenv -e .env.test.local prisma migrate reset && dotenv -e .env.test.local prisma db seed && dotenv -e .env.test.local jest --no-cache"
+    "test": "dotenv -e .env.test.local prisma migrate dev && dotenv -e .env.test.local prisma db seed && dotenv -e .env.test.local jest -i",
+    "dev": "nodemon src/server.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
