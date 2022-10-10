@@ -34,8 +34,8 @@ model Registers {
 }
 
 model Species {
-  id                     Int           @id @default(autoincrement())
-  cientificName          String        @unique
+  id                     Int         @id @default(autoincrement())
+  cientificName          String      @unique
   generalCharacteristics String
   curiosities            String?
   leafMorfology          String
@@ -47,14 +47,6 @@ model Species {
   fruitPicturePath       String?
   undergroundPicturePath String?
   edibleParts            String
-  createdAt              DateTime      @default(now())
+  createdAt              DateTime    @default(now())
   Registers              Registers[]
-  CommonNames            CommonNames[]
-}
-
-model CommonNames {
-  id       Int     @id @default(autoincrement())
-  name     String
-  specie   Species @relation(fields: [specieId], references: [id])
-  specieId Int
 }
