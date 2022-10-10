@@ -4,8 +4,6 @@ import { Registers, Species } from "@prisma/client";
 import { getSpecieRegisters } from "./registerServices";
 
 export async function createSpecie(specie: TSpecieData) {
-  //const specieData: TSpecieData = createSpecieObject(specie);
-
   const existSpecie = await getSpecieByName(specie.cientificName);
   if (existSpecie !== null)
     throw { type: "conflict", message: "This specie already exists" };
@@ -48,7 +46,7 @@ export async function updateSpecie(specie: TSpecieData, id: number) {
 export async function deleteSpecie(id: number) {
   const specie: Species = await getSpecieById(id);
   const specieRegisters: Registers[] = await getSpecieRegisters(id);
-  console.log(specieRegisters);
+
   if (specieRegisters.length >= 1)
     throw {
       type: "conflict",
@@ -58,44 +56,4 @@ export async function deleteSpecie(id: number) {
   await specieRepository.deleteSpecieById(id);
 
   return;
-}
-
-function createSpecieObject(specie: Object, pictures: Object) {
-  const picturesPath = createPicturePathObject(pictures);
-  const specieTexts = createSpecieTextObject(specie);
-
-  return { ...specieTexts, ...picturesPath };
-}
-
-function createSpecieTextObject(specie: Object) {
-  let specieData: TSpecieText = {
-    cientificName: specie["cientific-name"],
-    generalCharacteristics: specie["general-characteristics"],
-    leafMorfology: specie["leaf-morfology"],
-    flowerMorfology: specie["flower-morfology"],
-    fruitMorfology: specie["fruit-morfology"],
-    undergroundMorfology: specie["underground-morfology"],
-    edibleParts: specie["edible-parts"],
-  };
-
-  if (specie["curiosities"])
-    specieData = { ...specieData, curiosities: specie["curiosities"] };
-
-  return specieData;
-}
-
-function createPicturePathObject(pictures: Object) {
-  let picsPath: TSpeciePaths = {
-    leafPicturePath: `/public/uploads/${pictures["leaf-pic"][0].filename}`,
-    flowerPicturePath: `/public/uploads/${pictures["flower-pic"][0].filename}`,
-    fruitPicturePath: `/public/uploads/${pictures["fruit-pic"][0].filename}`,
-  };
-
-  if (pictures["underground-pic"])
-    picsPath = {
-      ...picsPath,
-      undergroundPicturePath: `/public/uploads/${pictures["underground-pic"][0].filename}`,
-    };
-
-  return picsPath;
 }
