@@ -7,8 +7,8 @@ export async function registerFactory(userId, specieId) {
       userId,
       specieId,
       title: faker.lorem.words(4),
-      longitude: faker.lorem.words(2),
-      latitude: faker.lorem.words(2),
+      latitude: faker.datatype.number({min: -85, max: 85, precision: 0.000000001}),
+      longitude: faker.datatype.number({min: -180, max: 180, precision: 0.000000001}),
       observations: faker.lorem.words(20),
     }
   });
@@ -19,8 +19,8 @@ export async function registerFactory(userId, specieId) {
 export async function registerBodyFactory(specieId) {
   return {
     title: faker.lorem.words(4),
-    longitude: faker.lorem.words(2),
-    latitude: faker.lorem.words(2),
+    latitude: faker.datatype.number({min: -85, max: 85, precision: 0.000000001}),
+    longitude: faker.datatype.number({min: -180, max: 180, precision: 0.000000001}),
     observations: faker.lorem.words(20),
     specieId,
   }
