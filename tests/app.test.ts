@@ -222,6 +222,7 @@ describe("Specie tests", () => {
 
     expect(result.status).toBe(401);
     expect(deletedSpecie).not.toBeFalsy();
+    expect(deletedSpecie.cientificName).toEqual(specie.cientificName);
   });
 });
 
@@ -243,6 +244,21 @@ describe("Register tests", () => {
     expect(confirmCreation).not.toBeNull();
     expect(confirmCreation.length).toEqual(1);
    });
+
+  it("Test POST /register without user", async () => {
+    const specie = await specieFactory();
+    
+    const register = await registerBodyFactory(specie.id)
+
+    const result = await server.post("/register").send(register);
+
+    const confirmCreation = await prisma.registers.findMany({
+      where: {title: register.title}
+    })
+
+    expect(result.status).toBe(401);
+    expect(confirmCreation.length).toEqual(0);
+});
 
    it("Test GET /myregisters/:userId", async () => {
     const userInitial = userBodyFactory();
@@ -308,6 +324,27 @@ describe("Register tests", () => {
     expect(updatedRegister.specieId).not.toEqual(register.specieId);
    });
 
+  it("Test PUT /register/:registerId without user", async () => {
+    const userInitial = userBodyFactory();
+    const user = await userFactory(userInitial);
+    const firstSpecie = await specieFactory();
+
+    const register = await registerFactory(user.id, firstSpecie.id);
+
+    const secondSpecie = await specieFactory();
+
+    const updateRegister = await registerBodyFactory(secondSpecie.id);
+
+    const result = await server.put(`/register/${register.id}`).send(updateRegister);
+  
+    const updatedRegister = await prisma.registers.findUnique({
+      where: { id: register.id }
+    });
+
+    expect(result.status).toBe(401);
+    expect(updatedRegister.specieId).toEqual(register.specieId);
+  });
+
    it("Test DELETE /register/:registerId", async () => {
     const userInitial = userBodyFactory();
     const user = await userFactory(userInitial);
@@ -318,12 +355,30 @@ describe("Register tests", () => {
 
     await server.delete(`/register/${register.id}`).set("Authorization", `Bearer ${token}`);
 
-    const deletedRegister = await prisma.species.findUnique({
+    const deletedRegister = await prisma.registers.findUnique({
       where: { id: register.id }
     });
 
     expect(deletedRegister).toBeFalsy();
    });
+
+  it("Test DELETE /register/:registerId without user", async () => {
+    const userInitial = userBodyFactory();
+    const user = await userFactory(userInitial);
+    const specie = await specieFactory();
+
+    const register = await registerFactory(user.id, specie.id);
+
+    const result = await server.delete(`/register/${register.id}`);
+
+    const deletedRegister = await prisma.registers.findUnique({
+      where: { id: register.id }
+    });
+
+    expect(result.status).toBe(401);
+    expect(deletedRegister).not.toBeFalsy();
+    expect(deletedRegister.title).toEqual(register.title);
+  });
 });
 
 afterAll(async () => {
