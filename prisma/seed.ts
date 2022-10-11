@@ -56,27 +56,6 @@ async function main() {
     ],
     skipDuplicates: true
   });
-
-  await prisma.registers.createMany({
-    data: [
-      {
-        title: "Register One",
-        latitude: faker.datatype.number({min: -85, max: 85, precision: 0.000000001}),
-        longitude: faker.datatype.number({min: -180, max: 180, precision: 0.000000001}),
-        specieId: Number(2),
-        userId: Number(1),
-        observations: faker.lorem.words(20),
-      },
-      {
-        title: "Register Two",
-        latitude: faker.datatype.number({min: -85, max: 85, precision: 0.000000001}),
-        longitude: faker.datatype.number({min: -180, max: 180, precision: 0.000000001}),
-        specieId: Number(1),
-        userId: Number(2),
-        observations: faker.lorem.words(20),
-      },
-    ],
-  });
 }
 
 main()

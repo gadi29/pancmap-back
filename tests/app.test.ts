@@ -78,6 +78,35 @@ describe("Specie tests", () => {
     expect(confirmCreation).not.toBeNull();
   });
 
+  it("Test POST /specie with common user", async () => {
+    const userInitial = userBodyFactory();
+    const user = await userFactory(userInitial);
+    const token = await tokenFactory({ id: user.id, name: user.name, superuser: user.superuser });
+    const specie = specieBodyFactory();
+
+    const result = await server.post("/specie").set("Authorization", `Bearer ${token}`).send(specie);
+
+    const confirmCreation = await prisma.species.findUnique({
+      where: { cientificName: specie.cientificName }
+    });
+
+    expect(result.status).toBe(401);
+    expect(confirmCreation).toBeNull();
+  });
+
+  it("Test POST /specie without user", async () => {
+    const specie = specieBodyFactory();
+
+    const result = await server.post("/specie").send(specie);
+
+    const confirmCreation = await prisma.species.findUnique({
+      where: { cientificName: specie.cientificName }
+    });
+
+    expect(result.status).toBe(401);
+    expect(confirmCreation).toBeNull();
+  });
+
   it("Test GET /specie/:specieId", async () => {
     const specie = await specieFactory();
 
@@ -115,6 +144,40 @@ describe("Specie tests", () => {
     expect(updatedSpecie.cientificName).not.toEqual(specie.cientificName);
   });
 
+  it("Test PUT /specie/:specieId with common user", async () => {
+    const userInitial = userBodyFactory();
+    const user = await userFactory(userInitial);
+    const token = await tokenFactory({ id: user.id, name: user.name, superuser: user.superuser });
+
+    const specie = await specieFactory();
+
+    const updateSpecie = specieBodyFactory();
+
+    const result = await server.put(`/specie/${specie.id}`).set("Authorization", `Bearer ${token}`).send(updateSpecie);
+  
+    const updatedSpecie = await prisma.species.findUnique({
+      where: { id: specie.id }
+    });
+
+    expect(result.status).toBe(401);
+    expect(updatedSpecie.cientificName).toEqual(specie.cientificName);
+  });
+
+  it("Test PUT /specie/:specieId without user", async () => {
+    const specie = await specieFactory();
+
+    const updateSpecie = specieBodyFactory();
+
+    const result = await server.put(`/specie/${specie.id}`).send(updateSpecie);
+  
+    const updatedSpecie = await prisma.species.findUnique({
+      where: { id: specie.id }
+    });
+
+    expect(result.status).toBe(401);
+    expect(updatedSpecie.cientificName).toEqual(specie.cientificName);
+  });
+
   it("Test DELETE /specie/:specieId", async () => {
     const userInitial = userBodyFactory();
     const user = await superUserFactory(userInitial);
@@ -129,6 +192,36 @@ describe("Specie tests", () => {
     });
 
     expect(deletedSpecie).toBeFalsy();
+  });
+
+  it("Test DELETE /specie/:specieId with common user", async () => {
+    const userInitial = userBodyFactory();
+    const user = await userFactory(userInitial);
+    const token = await tokenFactory({ id: user.id, name: user.name, superuser: user.superuser });
+
+    const specie = await specieFactory();
+
+    const result = await server.delete(`/specie/${specie.id}`).set("Authorization", `Bearer ${token}`);
+
+    const deletedSpecie = await prisma.species.findUnique({
+      where: { id: specie.id }
+    });
+
+    expect(result.status).toBe(401);
+    expect(deletedSpecie).not.toBeFalsy();
+  });
+
+  it("Test DELETE /specie/:specieId without user", async () => {
+    const specie = await specieFactory();
+
+    const result = await server.delete(`/specie/${specie.id}`);
+
+    const deletedSpecie = await prisma.species.findUnique({
+      where: { id: specie.id }
+    });
+
+    expect(result.status).toBe(401);
+    expect(deletedSpecie).not.toBeFalsy();
   });
 });
 
