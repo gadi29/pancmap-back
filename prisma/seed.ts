@@ -61,16 +61,16 @@ async function main() {
     data: [
       {
         title: "Register One",
-        longitude: faker.lorem.words(2),
-        latitude: faker.lorem.words(2),
+        latitude: faker.datatype.number({min: -85, max: 85, precision: 0.000000001}),
+        longitude: faker.datatype.number({min: -180, max: 180, precision: 0.000000001}),
         specieId: Number(2),
         userId: Number(1),
         observations: faker.lorem.words(20),
       },
       {
         title: "Register Two",
-        longitude: faker.lorem.words(2),
-        latitude: faker.lorem.words(2),
+        latitude: faker.datatype.number({min: -85, max: 85, precision: 0.000000001}),
+        longitude: faker.datatype.number({min: -180, max: 180, precision: 0.000000001}),
         specieId: Number(1),
         userId: Number(2),
         observations: faker.lorem.words(20),
