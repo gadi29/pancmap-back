@@ -5,7 +5,9 @@
   "main": "dist/src/server.js",
   "scripts": {
     "build": "tsc && npx prisma migrate deploy",
+    "build:docker": "tsc",
     "start": "node dist/src/server.js",
+    "start:docker": "npx prisma migrate dev && node dist/src/server.js",
     "test": "dotenv -e .env.test.local prisma migrate dev && dotenv -e .env.test.local prisma db seed && dotenv -e .env.test.local jest -i",
     "dev": "nodemon src/server.ts"
   },
