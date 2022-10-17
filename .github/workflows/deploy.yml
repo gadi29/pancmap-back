@@ -8,8 +8,6 @@ jobs:
     runs_on: self-hosted
     timeout-minutes: 20
     steps:
-      - name: Go to project directory
-        run: cd projeto-pancmap/
       - name: Checkout
         uses: actions/checkout@v3
       - name: Create back-end env file
