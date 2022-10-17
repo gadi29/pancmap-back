@@ -5,10 +5,10 @@ on:
       - main
 jobs:
   build:
-    runs_on: self-hosted
+    runs-on: self-hosted
     timeout-minutes: 20
     steps:
-      - name: Go to project directory
+      - name: Go to main directory
         run: cd projeto-pancmap/
       - name: Checkout
         uses: actions/checkout@v3
@@ -29,5 +29,5 @@ jobs:
         run: docker system prune -a
       - name: Build process
         run: docker-compose build
-      -name: Run app docker compose
+      - name: Run app docker compose
         run: docker-compose down -v && docker-compose up -d
