@@ -15,9 +15,9 @@ jobs:
         with:
           envkey_DATABASE_URL: "postgres://postgres:postgres@postgres_pancmap_db:5432/pancmap"
           envkey_POSTGRES_USER: "postgres"
-          envkey_POSTGRES_PASSWORD: ${secrets.POSTGRES_PASSWORD}
+          envkey_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           envkey_POSTGRES_DB: "pancmap"
-          envkey_JWT_SECRET: ${secrets.JWT_SECRET}
+          envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
           directory: projeto-pancmap-back/
           file_name: .env.development.local
           fail_on_empty: true
